@@ -74,7 +74,17 @@ function isPlaying(band) {
     if(band === undefined) band = 'PUP';
     var queryUrl = `https://rest.bandsintown.com/artists/${band}/events?app_id=codingbootcamp`;
     axios.get(queryUrl).then(function(response){
-        console.log(response.data);
+        //Take first 10 entries: https://stackoverflow.com/questions/39336556/how-can-i-slice-an-object-in-javascript
+        var tenShows = Object.keys(response.data).slice(0, 10).reduce((function(result, key){
+                result[key] = response.data[key];
+                return result;
+            }), {});
+
+        Object.keys(tenShows).forEach(function(id){
+            var currentShow = tenShows[id];
+            console.log('Venue:',currentShow.venue.name)
+        })
+
     }).catch(function(error){
         console.log(error);
     });
