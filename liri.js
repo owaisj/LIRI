@@ -14,7 +14,7 @@ switch(command) {
     break;
 
     case 'concert-this':
-    console.log('concert-this');
+    isPlaying(userInput);
     break;
 
     case 'movie-this':
@@ -64,6 +64,17 @@ function movieThis(film) {
         console.log('Actors:', movieInfo.Actors);
         console.log('Written by:', movieInfo.Writer);
         console.log('Directed by:', movieInfo.Director);
+    }).catch(function(error){
+        console.log(error);
+    });
+}
+
+//Concert-This-Band
+function isPlaying(band) {
+    if(band === undefined) band = 'PUP';
+    var queryUrl = `https://rest.bandsintown.com/artists/${band}/events?app_id=codingbootcamp`;
+    axios.get(queryUrl).then(function(response){
+        console.log(response.data);
     }).catch(function(error){
         console.log(error);
     });
