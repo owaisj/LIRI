@@ -6,10 +6,12 @@ var spotify = new Spotify(keys.spotify);
 
 //Command Argument
 var command = process.argv[2];
+var userInput = process.argv[3];
+console.log('User Input:', userInput);
 switch(command) {
 
     case 'spotify-this-song':
-    console.log('spotify-this-song');
+    spotifyThis(userInput);
     break;
 
     case 'concert-this':
@@ -25,4 +27,24 @@ switch(command) {
     break;
 
     default: console.log('Please enter a command');
+}
+
+//Spotify-This-Song
+function spotifyThis(song) {
+    if (song === undefined) song = 'The Sign Ace of Base';
+    spotify.search({
+        type: 'track',
+        query: song,
+        limit: 1
+    }).then(function(response){
+        var information = response.tracks.items[0];
+        //console.log('Response', information);
+        console.log('\nTitle:',information.name);
+        console.log('Artist:',information.artists[0].name);
+        console.log('Album:',information.album.name)
+        console.log('Link:', information.external_urls.spotify);
+    })
+    .catch(function(error){
+        console.log(error)
+    });
 }
