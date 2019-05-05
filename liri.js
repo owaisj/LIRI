@@ -52,19 +52,19 @@ function spotifyThis(song) {
 function movieThis(film) {
     if (film === undefined) film = 'Looper';
     var queryUrl = `http://www.omdbapi.com/?t=${film}&y=&plot=short&apikey=trilogy`;
-    axios.get(queryUrl).then(
-        function(response) {
-            var movieInfo = response.data;
-            console.log('Title:',movieInfo.Title);
-            console.log('Released:',movieInfo.Year);
-            console.log('IMDB Rating:', movieInfo.imdbRating);
-            console.log('Rotten Tomatoes:',movieInfo.Ratings[1].Value)
-            console.log('Country:',movieInfo.Country);
-            console.log('Language(s):', movieInfo.Language);
-            console.log('Plot:', movieInfo.Plot);
-            console.log('Actors:', movieInfo.Actors);
-            console.log('Written by:', movieInfo.Writer);
-            console.log('Directed by:', movieInfo.Director);
-        }
-    )
+    axios.get(queryUrl).then(function(response) {
+        var movieInfo = response.data;
+        console.log('Title:',movieInfo.Title);
+        console.log('Released:',movieInfo.Year);
+        console.log('IMDB Rating:', movieInfo.imdbRating);
+        console.log('Rotten Tomatoes:',movieInfo.Ratings[1].Value)
+        console.log('Country:',movieInfo.Country);
+        console.log('Language(s):', movieInfo.Language);
+        console.log('Plot:', movieInfo.Plot);
+        console.log('Actors:', movieInfo.Actors);
+        console.log('Written by:', movieInfo.Writer);
+        console.log('Directed by:', movieInfo.Director);
+    }).catch(function(error){
+        console.log(error);
+    });
 }
