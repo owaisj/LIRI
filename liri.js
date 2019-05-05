@@ -1,13 +1,12 @@
 //From Assignment Page
 require('dotenv').config();
 var keys = require('./keys.js');
+var axios = require("axios");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 
-//Command Argument
 var command = process.argv[2];
 var userInput = process.argv[3];
-console.log('User Input:', userInput);
 switch(command) {
 
     case 'spotify-this-song':
@@ -19,7 +18,7 @@ switch(command) {
     break;
 
     case 'movie-this':
-    console.log('movie-this');
+    movieThis(userInput);
     break;
 
     case 'do-what-it-says':
@@ -47,4 +46,25 @@ function spotifyThis(song) {
     .catch(function(error){
         console.log(error)
     });
+}
+
+//Movie-This-Film
+function movieThis(film) {
+    if (film === undefined) film = 'Looper';
+    var queryUrl = `http://www.omdbapi.com/?t=${film}&y=&plot=short&apikey=trilogy`;
+    axios.get(queryUrl).then(
+        function(response) {
+            var movieInfo = response.data;
+            console.log('Title:',movieInfo.Title);
+            console.log('Released:',movieInfo.Year);
+            console.log('IMDB Rating:', movieInfo.imdbRating);
+            console.log('Rotten Tomatoes:',movieInfo.Ratings[1].Value)
+            console.log('Country:',movieInfo.Country);
+            console.log('Language(s):', movieInfo.Language);
+            console.log('Plot:', movieInfo.Plot);
+            console.log('Actors:', movieInfo.Actors);
+            console.log('Written by:', movieInfo.Writer);
+            console.log('Directed by:', movieInfo.Director);
+        }
+    )
 }
