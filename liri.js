@@ -137,3 +137,8 @@ function doWhat() {
         }
     })
 }
+
+//Log
+function log() {
+    console.log('log');
+}
