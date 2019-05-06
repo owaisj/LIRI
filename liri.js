@@ -4,6 +4,7 @@ var keys = require('./keys.js');
 var axios = require("axios");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
+var moment = require('moment');
 
 var command = process.argv[2];
 var userInput = process.argv[3];
@@ -14,7 +15,7 @@ switch(command) {
     break;
 
     case 'concert-this':
-    console.log('concert-this');
+    isPlaying(userInput);
     break;
 
     case 'movie-this':
@@ -64,6 +65,38 @@ function movieThis(film) {
         console.log('Actors:', movieInfo.Actors);
         console.log('Written by:', movieInfo.Writer);
         console.log('Directed by:', movieInfo.Director);
+    }).catch(function(error){
+        console.log(error);
+    });
+}
+
+//Concert-This-Band
+function isPlaying(band) {
+    if(band === undefined) band = 'PUP';
+    var queryUrl = `https://rest.bandsintown.com/artists/${band}/events?app_id=codingbootcamp`;
+    axios.get(queryUrl).then(function(response){
+        //Take first 10 entries: https://stackoverflow.com/questions/39336556/how-can-i-slice-an-object-in-javascript
+        var tenShows = Object.keys(response.data).slice(0, 10).reduce((function(result, key){
+                result[key] = response.data[key];
+                return result;
+            }), 
+        {});
+        console.log('You want information about',band,'\n');
+        Object.keys(tenShows).forEach(function(id){
+            var currentShow = tenShows[id];
+            var currentDateTime = currentShow.datetime.split('T');
+            var currentDate = moment(currentDateTime[0],'YYYY-MM-DD').format('MM/DD/YYYY');
+            var currentTime = moment(currentDateTime[1],'HH:mm:ss').format('hh:mma');
+            console.log('Venue:',currentShow.venue.name);
+            if (currentShow.venue.region !== '') {
+                console.log('Location:',`${currentShow.venue.city}, ${currentShow.venue.region}`,currentShow.venue.country);
+            } else {
+                console.log('Location:', currentShow.venue.city, currentShow.venue.country);
+            }
+            
+            console.log('Event Date:',currentDate,'at',currentTime,'\n');
+        })
+
     }).catch(function(error){
         console.log(error);
     });
