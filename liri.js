@@ -81,13 +81,17 @@ function isPlaying(band) {
                 return result;
             }), 
         {});
-        var output = `You want concert information about ${band}\n`;
+
+        var output = 'Concert This Artist\n';
+        output += '==============================================\n';
+        output = `You want concert information about ${band}\n`;
         Object.keys(tenShows).forEach(function(id){
             var currentShow = tenShows[id];
             var currentDateTime = currentShow.datetime.split('T');
             var currentDate = moment(currentDateTime[0],'YYYY-MM-DD').format('MM/DD/YYYY');
             var currentTime = moment(currentDateTime[1],'HH:mm:ss').format('hh:mma');
-            
+
+            output += `=== Show ${Number(id) + 1} ====================\n`;
             output += `Venue: ${currentShow.venue.name}\n`;
             if (currentShow.venue.region !== '') {
                 output += `Location: ${currentShow.venue.city}, ${currentShow.venue.region}, ${currentShow.venue.country}\n`;
@@ -97,8 +101,9 @@ function isPlaying(band) {
             
             output += `Event Date: ${currentDate} at ${currentTime}\n`;
         })
+        output += '==============================================';
         console.log(output);
-        log(output);
+        //log(output);
 
     }).catch(function(error){
         console.log(error);
