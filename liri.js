@@ -39,10 +39,9 @@ function spotifyThis(song) {
         limit: 1
     }).then(function(response){
         var information = response.tracks.items[0];
-        //console.log('Response', information);
         var output = `Title: ${information.name}\nArtist: ${information.artists[0].name}\nAlbum: ${information.album.name}\nLink: ${information.external_urls.spotify}`;
         console.log(output);
-        //log(output);
+        log(output);
     })
     .catch(function(error){
         console.log(error)
@@ -138,6 +137,9 @@ function doWhat() {
 }
 
 //Log
-function log() {
-    console.log('log');
+function log(data) {
+    fs.appendFile('log.txt',`${data}\n`, function(error){
+        if (error) return console.log(error);
+        console.log('Output added to log.txt');
+    })
 }
