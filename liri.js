@@ -74,31 +74,28 @@ function isPlaying(band) {
         var output = 'Concert This Artist\n';
         output += '==============================================\n';
         
-        var numShows = Object.keys(response.data.length);
+        var numShows = Object.keys(response.data).length;
 
+        var end = 1; //Where to stop slicing of Object.keys
         if (numShows === 0) {
             output += `${band} is not on tour.\n`;
             output += '==============================================';
             log(output);
             return console.log(output);
+        } else if (numShows > 9) {
+            end = 10; //More than 10 shows
+        } else {
+            end = numShows + 1; //Less than 10 shows
         }
 
         output = `You want concert information about ${band}\n`;
-
-        var stoppingPoint = 0;
-        if (numShows >= 10) {
-            stoppingPoint = 10;
-        } else {
-            stoppingPoint = numShows + 1;
-        }
-        
-        var tenShows = Object.keys(response.data).slice(0, 10).reduce((function(result, key){
+        var showSnippet = Object.keys(response.data).slice(0, end).reduce((function(result, key){
                 result[key] = response.data[key];
                 return result;
             }), 
         {});
-        Object.keys(tenShows).forEach(function(id){
-            var currentShow = tenShows[id];
+        Object.keys(showSnippet).forEach(function(id){
+            var currentShow = showSnippet[id];
             var currentDateTime = currentShow.datetime.split('T');
             var currentDate = moment(currentDateTime[0],'YYYY-MM-DD').format('MM/DD/YYYY');
             var currentTime = moment(currentDateTime[1],'HH:mm:ss').format('hh:mma');
@@ -110,7 +107,6 @@ function isPlaying(band) {
             } else {
                 output += `Location: ${currentShow.venue.city}, ${currentShow.venue.country}\n`;
             }
-            
             output += `Event Date: ${currentDate} at ${currentTime}\n`;
         })
         output += '==============================================';
