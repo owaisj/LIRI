@@ -81,14 +81,20 @@ function isPlaying(band) {
                 return result;
             }), 
         {});
-        console.log('You want information about',band);
+        console.log('You want information about',band,'\n');
         Object.keys(tenShows).forEach(function(id){
             var currentShow = tenShows[id];
             var currentDateTime = currentShow.datetime.split('T');
-            var currentDate = moment('currentDate[0]','YYYY-MM-DD').format('MM/DD/YYYY');
+            var currentDate = moment(currentDateTime[0],'YYYY-MM-DD').format('MM/DD/YYYY');
+            var currentTime = moment(currentDateTime[1],'HH:mm:ss').format('hh:mma');
             console.log('Venue:',currentShow.venue.name);
-            console.log('Location:',currentShow.venue.city);
-            console.log('Event Date:',currentDate,'at',currentDateTime[1]);
+            if (currentShow.venue.region !== '') {
+                console.log('Location:',`${currentShow.venue.city}, ${currentShow.venue.region}`,currentShow.venue.country);
+            } else {
+                console.log('Location:', currentShow.venue.city, currentShow.venue.country);
+            }
+            
+            console.log('Event Date:',currentDate,'at',currentTime,'\n');
         })
 
     }).catch(function(error){
