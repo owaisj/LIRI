@@ -39,7 +39,10 @@ function spotifyThis(song) {
         limit: 1
     }).then(function(response){
         var information = response.tracks.items[0];
-        var output = `Title: ${information.name}\nArtist: ${information.artists[0].name}\nAlbum: ${information.album.name}\nLink: ${information.external_urls.spotify}\n`;
+        var output ='Spotify This Song\n';
+        output += '==============================================\n'
+        output += `Title: ${information.name}\nArtist: ${information.artists[0].name}\nAlbum: ${information.album.name}\nLink: ${information.external_urls.spotify}\n`;
+        output += '=============================================='
         console.log(output);
         log(output);
     })
