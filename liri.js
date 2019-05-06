@@ -120,9 +120,12 @@ function doWhat() {
         var separate = commandArray[index].indexOf('"');
         var rCommand = commandArray[index].slice(0, separate-1);
         var rInput = commandArray[index].slice(separate, commandArray[index].length);
-        console.log('Command',rCommand);
-        console.log('Input',rInput);
-        var output = `Liri will perform ${rCommand} on ${rInput} (It'll do what you say)`;
+
+        var output = 'LIRI will do what you say\n';
+        output += '------------------------------------------------\n';
+        output += `Liri will perform ${rCommand} on ${rInput}\n`;
+        output += '------------------------------------------------';
+        console.log(output);
         log(output);
         switch(rCommand) {
 
