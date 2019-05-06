@@ -73,8 +73,10 @@ function isPlaying(band) {
     axios.get(queryUrl).then(function(response){
         var output = 'Concert This Artist\n';
         output += '==============================================\n';
+        
+        var numShows = Object.keys(response.data.length);
 
-        if (Object.keys(response.data).length === 0) {
+        if (numShows === 0) {
             output += `${band} is not on tour.\n`;
             output += '==============================================';
             log(output);
@@ -82,6 +84,14 @@ function isPlaying(band) {
         }
 
         output = `You want concert information about ${band}\n`;
+
+        var stoppingPoint = 0;
+        if (numShows >= 10) {
+            stoppingPoint = 10;
+        } else {
+            stoppingPoint = numShows + 1;
+        }
+        
         var tenShows = Object.keys(response.data).slice(0, 10).reduce((function(result, key){
                 result[key] = response.data[key];
                 return result;
