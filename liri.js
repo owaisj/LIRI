@@ -71,16 +71,22 @@ function isPlaying(band) {
     if(band === undefined) band = 'PUP';
     var queryUrl = `https://rest.bandsintown.com/artists/${band}/events?app_id=codingbootcamp`;
     axios.get(queryUrl).then(function(response){
-        //Take first 10 entries: https://stackoverflow.com/questions/39336556/how-can-i-slice-an-object-in-javascript
+        var output = 'Concert This Artist\n';
+        output += '==============================================\n';
+
+        if (Object.keys(response.data).length === 0) {
+            output += `${band} is not on tour.\n`;
+            output += '==============================================';
+            log(output);
+            return console.log(output);
+        }
+
+        output = `You want concert information about ${band}\n`;
         var tenShows = Object.keys(response.data).slice(0, 10).reduce((function(result, key){
                 result[key] = response.data[key];
                 return result;
             }), 
         {});
-
-        var output = 'Concert This Artist\n';
-        output += '==============================================\n';
-        output = `You want concert information about ${band}\n`;
         Object.keys(tenShows).forEach(function(id){
             var currentShow = tenShows[id];
             var currentDateTime = currentShow.datetime.split('T');
@@ -99,7 +105,7 @@ function isPlaying(band) {
         })
         output += '==============================================';
         console.log(output);
-        //log(output);
+        log(output);
 
     }).catch(function(error){
         console.log(error);
@@ -109,9 +115,8 @@ function isPlaying(band) {
 function doWhat() {
     fs.readFile('random.txt','utf8', function(error, data){
         if (error) return console.log(error);
-        var commandArray = data.split(',');
-        var maxIndex = commandArray.length - 1;
-        var index = Math.floor(Math.random()*maxIndex);
+        var commandArray = data.split('\n');
+        var index = Math.floor(Math.random()*commandArray.length);
         var separate = commandArray[index].indexOf('"');
         var rCommand = commandArray[index].slice(0, separate-1);
         var rInput = commandArray[index].slice(separate, commandArray[index].length);
