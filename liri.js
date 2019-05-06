@@ -4,6 +4,7 @@ var keys = require('./keys.js');
 var axios = require("axios");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
+var moment = require('moment');
 
 var command = process.argv[2];
 var userInput = process.argv[3];
@@ -84,10 +85,10 @@ function isPlaying(band) {
         Object.keys(tenShows).forEach(function(id){
             var currentShow = tenShows[id];
             var currentDateTime = currentShow.datetime.split('T');
-            
+            var currentDate = moment('currentDate[0]','YYYY-MM-DD').format('MM/DD/YYYY');
             console.log('Venue:',currentShow.venue.name);
             console.log('Location:',currentShow.venue.city);
-            console.log('Event Date:',currentDateTime[0],'at',currentDateTime[1]);
+            console.log('Event Date:',currentDate,'at',currentDateTime[1]);
         })
 
     }).catch(function(error){
