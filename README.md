@@ -26,3 +26,5 @@ Clone the repository to your computer and then navigate to the directory in the 
 - Formatting random.txt (Do what)
 - Working with objects and treating like arrays (Concert this)
 - Using console.log and formatting outputs
+### Author
+- Owais Jamil
