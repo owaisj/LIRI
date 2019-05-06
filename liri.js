@@ -54,16 +54,11 @@ function movieThis(film) {
     var queryUrl = `http://www.omdbapi.com/?t=${film}&y=&plot=short&apikey=trilogy`;
     axios.get(queryUrl).then(function(response) {
         var movieInfo = response.data;
-        console.log('Title:',movieInfo.Title);
-        console.log('Released:',movieInfo.Year);
-        console.log('IMDB Rating:', movieInfo.imdbRating);
-        console.log('Rotten Tomatoes:',movieInfo.Ratings[1].Value)
-        console.log('Country:',movieInfo.Country);
-        console.log('Language(s):', movieInfo.Language);
-        console.log('Plot:', movieInfo.Plot);
-        console.log('Actors:', movieInfo.Actors);
-        console.log('Written by:', movieInfo.Writer);
-        console.log('Directed by:', movieInfo.Director);
+        var output = `Title: ${movieInfo.Title}\nReleased: ${movieInfo.Year}\nIMDB Rating: ${movieInfo.imdbRating}\n`;
+        output += `Rotten Tomatoes: ${movieInfo.Ratings[1].Value}\nCountry: ${movieInfo.Country}\nLanguage(s): ${movieInfo.Language}\n`;
+        output += `Plot: ${movieInfo.Plot}\nActors: ${movieInfo.Actors}\nWritten By: ${movieInfo.Writer}\nDirected By: ${movieInfo.Director}`;
+        console.log(output);
+        log(output);
     }).catch(function(error){
         console.log(error);
     });
