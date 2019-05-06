@@ -40,9 +40,9 @@ function spotifyThis(song) {
     }).then(function(response){
         var information = response.tracks.items[0];
         var output ='Spotify This Song\n';
-        output += '==============================================\n'
+        output += '==============================================\n';
         output += `Title: ${information.name}\nArtist: ${information.artists[0].name}\nAlbum: ${information.album.name}\nLink: ${information.external_urls.spotify}\n`;
-        output += '=============================================='
+        output += '==============================================';
         console.log(output);
         log(output);
     })
@@ -57,9 +57,12 @@ function movieThis(film) {
     var queryUrl = `http://www.omdbapi.com/?t=${film}&y=&plot=short&apikey=trilogy`;
     axios.get(queryUrl).then(function(response) {
         var movieInfo = response.data;
-        var output = `Title: ${movieInfo.Title}\nReleased: ${movieInfo.Year}\nIMDB Rating: ${movieInfo.imdbRating}\n`;
+        var output = 'Movie This Film\n';
+        output += '==============================================\n';
+        output += `Title: ${movieInfo.Title}\nReleased: ${movieInfo.Year}\nIMDB Rating: ${movieInfo.imdbRating}\n`;
         output += `Rotten Tomatoes: ${movieInfo.Ratings[1].Value}\nCountry: ${movieInfo.Country}\nLanguage(s): ${movieInfo.Language}\n`;
         output += `Plot: ${movieInfo.Plot}\nActors: ${movieInfo.Actors}\nWritten By: ${movieInfo.Writer}\nDirected By: ${movieInfo.Director}\n`;
+        output += '==============================================';
         console.log(output);
         log(output);
     }).catch(function(error){
