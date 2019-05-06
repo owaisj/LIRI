@@ -111,6 +111,8 @@ function doWhat() {
         var rInput = commandArray[index].slice(separate, commandArray[index].length);
         console.log('Command',rCommand);
         console.log('Input',rInput);
+        var output = `Liri will perform ${rCommand} on ${rInput}\n`;
+        log(output);
         switch(rCommand) {
 
             case 'spotify-this-song':
