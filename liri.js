@@ -75,21 +75,24 @@ function isPlaying(band) {
                 return result;
             }), 
         {});
-        console.log('You want information about',band,'\n');
+        var output = `You want information about ${band}\n`;
         Object.keys(tenShows).forEach(function(id){
             var currentShow = tenShows[id];
             var currentDateTime = currentShow.datetime.split('T');
             var currentDate = moment(currentDateTime[0],'YYYY-MM-DD').format('MM/DD/YYYY');
             var currentTime = moment(currentDateTime[1],'HH:mm:ss').format('hh:mma');
-            console.log('Venue:',currentShow.venue.name);
+            
+            output += `Venue: ${currentShow.venue.name}\n`;
             if (currentShow.venue.region !== '') {
-                console.log('Location:',`${currentShow.venue.city}, ${currentShow.venue.region}`,currentShow.venue.country);
+                output += `Location: ${currentShow.venue.city}, ${currentShow.venue.region}, ${currentShow.venue.country}\n`;
             } else {
-                console.log('Location:', currentShow.venue.city, currentShow.venue.country);
+                output += `Location: ${currentShow.venue.city}, ${currentShow.venue.country}\n`;
             }
             
-            console.log('Event Date:',currentDate,'at',currentTime,'\n');
+            output += `Event Date: ${currentDate} at ${currentTime}\n`;
         })
+        console.log(output);
+        log(output);
 
     }).catch(function(error){
         console.log(error);
