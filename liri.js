@@ -88,7 +88,7 @@ function isPlaying(band) {
             end = numShows + 1; //Less than 10 shows (Tycho)
         }
 
-        output = `You want concert information about ${band}\n`;
+        output += `Concert information about ${band}\n`;
         var showSnippet = Object.keys(response.data).slice(0, end).reduce((function(result, key){
                 result[key] = response.data[key];
                 return result;
