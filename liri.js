@@ -1,4 +1,3 @@
-//From Assignment Page
 require('dotenv').config();
 var keys = require('./keys.js');
 var axios = require("axios");
@@ -30,7 +29,6 @@ switch(command) {
     default: console.log('Please enter a command');
 }
 
-//Spotify-This-Song
 function spotifyThis(song) {
     if (song === undefined) song = 'The Sign Ace of Base';
     spotify.search({
@@ -51,7 +49,6 @@ function spotifyThis(song) {
     });
 }
 
-//Movie-This-Film
 function movieThis(film) {
     if (film === undefined) film = 'Looper';
     var queryUrl = `http://www.omdbapi.com/?t=${film}&y=&plot=short&apikey=trilogy`;
@@ -70,7 +67,6 @@ function movieThis(film) {
     });
 }
 
-//Concert-This-Band
 function isPlaying(band) {
     if(band === undefined) band = 'PUP';
     var queryUrl = `https://rest.bandsintown.com/artists/${band}/events?app_id=codingbootcamp`;
@@ -110,7 +106,6 @@ function isPlaying(band) {
     });
 }
 
-//Do-What-It-Says
 function doWhat() {
     fs.readFile('random.txt','utf8', function(error, data){
         if (error) return console.log(error);
@@ -148,7 +143,6 @@ function doWhat() {
     })
 }
 
-//Log
 function log(data) {
     fs.appendFile('log.txt',`${data}\n`, function(error){
         if (error) return console.log(error);
