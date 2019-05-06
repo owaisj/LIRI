@@ -53,7 +53,7 @@ function spotifyThis(song) {
 }
 
 function movieThis(film) {
-    if (film === undefined) film = 'Looper';
+    if (film === undefined) film = 'Catch Me If You Can';
     var queryUrl = `http://www.omdbapi.com/?t=${film}&y=&plot=short&apikey=trilogy`;
     axios.get(queryUrl).then(function(response) {
         var movieInfo = response.data;
