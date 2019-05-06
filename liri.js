@@ -77,15 +77,15 @@ function isPlaying(band) {
         var numShows = Object.keys(response.data).length;
 
         var end = 1; //Where to stop slicing of Object.keys
-        if (numShows === 0) {
+        if (numShows === 0) { //Radiohead (Not on tour)
             output += `${band} is not on tour.\n`;
             output += '==============================================';
             log(output);
             return console.log(output);
         } else if (numShows > 9) {
-            end = 10; //More than 10 shows
+            end = 10; //More than 10 shows (PUP, The Menzingers)
         } else {
-            end = numShows + 1; //Less than 10 shows
+            end = numShows + 1; //Less than 10 shows (Tycho)
         }
 
         output = `You want concert information about ${band}\n`;
