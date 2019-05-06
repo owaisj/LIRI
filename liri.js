@@ -78,11 +78,16 @@ function isPlaying(band) {
         var tenShows = Object.keys(response.data).slice(0, 10).reduce((function(result, key){
                 result[key] = response.data[key];
                 return result;
-            }), {});
-
+            }), 
+        {});
+        console.log('You want information about',band);
         Object.keys(tenShows).forEach(function(id){
             var currentShow = tenShows[id];
-            console.log('Venue:',currentShow.venue.name)
+            var currentDateTime = currentShow.datetime.split('T');
+            
+            console.log('Venue:',currentShow.venue.name);
+            console.log('Location:',currentShow.venue.city);
+            console.log('Event Date:',currentDateTime[0],'at',currentDateTime[1]);
         })
 
     }).catch(function(error){
