@@ -5,6 +5,7 @@ var axios = require("axios");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var moment = require('moment');
+var fs = require('fs');
 
 var command = process.argv[2];
 var userInput = process.argv[3];
@@ -23,7 +24,7 @@ switch(command) {
     break;
 
     case 'do-what-it-says':
-    console.log('do-what-it-says');
+    doWhat();
     break;
 
     default: console.log('Please enter a command');
@@ -100,4 +101,39 @@ function isPlaying(band) {
     }).catch(function(error){
         console.log(error);
     });
+}
+
+//Do-What-It-Says
+function doWhat() {
+    fs.readFile('random.txt','utf8', function(error, data){
+        if (error) return console.log(error);
+        var commandArray = data.split(',');
+        var maxIndex = commandArray.length - 1;
+        var index = Math.floor(Math.random()*maxIndex);
+        var separate = commandArray[index].indexOf('"');
+        var rCommand = commandArray[index].slice(0, separate-1);
+        var rInput = commandArray[index].slice(separate, commandArray[index].length);
+        console.log('Command',rCommand);
+        console.log('Input',rInput);
+        switch(rCommand) {
+
+            case 'spotify-this-song':
+            spotifyThis(rInput);
+            break;
+        
+            case 'concert-this':
+            isPlaying(rInput);
+            break;
+        
+            case 'movie-this':
+            movieThis(rInput);
+            break;
+        
+            case 'do-what-it-says':
+            doWhat();
+            break;
+        
+            default: console.log('Please enter a command');
+        }
+    })
 }
