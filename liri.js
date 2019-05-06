@@ -39,11 +39,9 @@ function spotifyThis(song) {
         limit: 1
     }).then(function(response){
         var information = response.tracks.items[0];
-        //console.log('Response', information);
-        console.log('\nTitle:',information.name);
-        console.log('Artist:',information.artists[0].name);
-        console.log('Album:',information.album.name)
-        console.log('Link:', information.external_urls.spotify);
+        var output = `Title: ${information.name}\nArtist: ${information.artists[0].name}\nAlbum: ${information.album.name}\nLink: ${information.external_urls.spotify}\n`;
+        console.log(output);
+        log(output);
     })
     .catch(function(error){
         console.log(error)
@@ -56,16 +54,11 @@ function movieThis(film) {
     var queryUrl = `http://www.omdbapi.com/?t=${film}&y=&plot=short&apikey=trilogy`;
     axios.get(queryUrl).then(function(response) {
         var movieInfo = response.data;
-        console.log('Title:',movieInfo.Title);
-        console.log('Released:',movieInfo.Year);
-        console.log('IMDB Rating:', movieInfo.imdbRating);
-        console.log('Rotten Tomatoes:',movieInfo.Ratings[1].Value)
-        console.log('Country:',movieInfo.Country);
-        console.log('Language(s):', movieInfo.Language);
-        console.log('Plot:', movieInfo.Plot);
-        console.log('Actors:', movieInfo.Actors);
-        console.log('Written by:', movieInfo.Writer);
-        console.log('Directed by:', movieInfo.Director);
+        var output = `Title: ${movieInfo.Title}\nReleased: ${movieInfo.Year}\nIMDB Rating: ${movieInfo.imdbRating}\n`;
+        output += `Rotten Tomatoes: ${movieInfo.Ratings[1].Value}\nCountry: ${movieInfo.Country}\nLanguage(s): ${movieInfo.Language}\n`;
+        output += `Plot: ${movieInfo.Plot}\nActors: ${movieInfo.Actors}\nWritten By: ${movieInfo.Writer}\nDirected By: ${movieInfo.Director}\n`;
+        console.log(output);
+        log(output);
     }).catch(function(error){
         console.log(error);
     });
@@ -82,21 +75,24 @@ function isPlaying(band) {
                 return result;
             }), 
         {});
-        console.log('You want information about',band,'\n');
+        var output = `You want concert information about ${band}\n`;
         Object.keys(tenShows).forEach(function(id){
             var currentShow = tenShows[id];
             var currentDateTime = currentShow.datetime.split('T');
             var currentDate = moment(currentDateTime[0],'YYYY-MM-DD').format('MM/DD/YYYY');
             var currentTime = moment(currentDateTime[1],'HH:mm:ss').format('hh:mma');
-            console.log('Venue:',currentShow.venue.name);
+            
+            output += `Venue: ${currentShow.venue.name}\n`;
             if (currentShow.venue.region !== '') {
-                console.log('Location:',`${currentShow.venue.city}, ${currentShow.venue.region}`,currentShow.venue.country);
+                output += `Location: ${currentShow.venue.city}, ${currentShow.venue.region}, ${currentShow.venue.country}\n`;
             } else {
-                console.log('Location:', currentShow.venue.city, currentShow.venue.country);
+                output += `Location: ${currentShow.venue.city}, ${currentShow.venue.country}\n`;
             }
             
-            console.log('Event Date:',currentDate,'at',currentTime,'\n');
+            output += `Event Date: ${currentDate} at ${currentTime}\n`;
         })
+        console.log(output);
+        log(output);
 
     }).catch(function(error){
         console.log(error);
@@ -115,6 +111,8 @@ function doWhat() {
         var rInput = commandArray[index].slice(separate, commandArray[index].length);
         console.log('Command',rCommand);
         console.log('Input',rInput);
+        var output = `Liri will perform ${rCommand} on ${rInput} (It'll do what you say)`;
+        log(output);
         switch(rCommand) {
 
             case 'spotify-this-song':
@@ -135,5 +133,13 @@ function doWhat() {
         
             default: console.log('Please enter a command');
         }
+    })
+}
+
+//Log
+function log(data) {
+    fs.appendFile('log.txt',`${data}\n`, function(error){
+        if (error) return console.log(error);
+        console.log('Output added to log.txt');
     })
 }
