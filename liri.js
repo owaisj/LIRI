@@ -121,9 +121,7 @@ function doWhat() {
         var rCommand = commandArray[index].slice(0, separate-1);
         var rInput = commandArray[index].slice(separate, commandArray[index].length);
 
-        var output = 'LIRI will do what you say\n';
-        output += '------------------------------------------------\n';
-        output += `Liri will perform ${rCommand} on ${rInput}\n`;
+        var output = `Liri will perform ${rCommand} on ${rInput}\n`;
         output += '------------------------------------------------';
         console.log(output);
         log(output);
@@ -154,6 +152,6 @@ function doWhat() {
 function log(data) {
     fs.appendFile('log.txt',`${data}\n`, function(error){
         if (error) return console.log(error);
-        console.log('Output added to log.txt');
+        console.log('[Output added to log.txt]');
     })
 }
