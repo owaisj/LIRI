@@ -39,7 +39,7 @@ function spotifyThis(song) {
         limit: 1
     }).then(function(response){
         var information = response.tracks.items[0];
-        var output = `Title: ${information.name}\nArtist: ${information.artists[0].name}\nAlbum: ${information.album.name}\nLink: ${information.external_urls.spotify}`;
+        var output = `Title: ${information.name}\nArtist: ${information.artists[0].name}\nAlbum: ${information.album.name}\nLink: ${information.external_urls.spotify}\n`;
         console.log(output);
         log(output);
     })
@@ -56,7 +56,7 @@ function movieThis(film) {
         var movieInfo = response.data;
         var output = `Title: ${movieInfo.Title}\nReleased: ${movieInfo.Year}\nIMDB Rating: ${movieInfo.imdbRating}\n`;
         output += `Rotten Tomatoes: ${movieInfo.Ratings[1].Value}\nCountry: ${movieInfo.Country}\nLanguage(s): ${movieInfo.Language}\n`;
-        output += `Plot: ${movieInfo.Plot}\nActors: ${movieInfo.Actors}\nWritten By: ${movieInfo.Writer}\nDirected By: ${movieInfo.Director}`;
+        output += `Plot: ${movieInfo.Plot}\nActors: ${movieInfo.Actors}\nWritten By: ${movieInfo.Writer}\nDirected By: ${movieInfo.Director}\n`;
         console.log(output);
         log(output);
     }).catch(function(error){
@@ -75,7 +75,7 @@ function isPlaying(band) {
                 return result;
             }), 
         {});
-        var output = `You want information about ${band}\n`;
+        var output = `You want concert information about ${band}\n`;
         Object.keys(tenShows).forEach(function(id){
             var currentShow = tenShows[id];
             var currentDateTime = currentShow.datetime.split('T');
@@ -111,7 +111,7 @@ function doWhat() {
         var rInput = commandArray[index].slice(separate, commandArray[index].length);
         console.log('Command',rCommand);
         console.log('Input',rInput);
-        var output = `Liri will perform ${rCommand} on ${rInput}\n`;
+        var output = `Liri will perform ${rCommand} on ${rInput} (It'll do what you say)`;
         log(output);
         switch(rCommand) {
 
