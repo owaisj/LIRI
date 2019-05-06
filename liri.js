@@ -6,27 +6,30 @@ var spotify = new Spotify(keys.spotify);
 var moment = require('moment');
 var fs = require('fs');
 
-var command = process.argv[2];
+var userCommand = process.argv[2];
 var userInput = process.argv[3];
-switch(command) {
 
-    case 'spotify-this-song':
-    spotifyThis(userInput);
-    break;
+function switchCase(command, input) {
+    switch(command) {
 
-    case 'concert-this':
-    isPlaying(userInput);
-    break;
-
-    case 'movie-this':
-    movieThis(userInput);
-    break;
-
-    case 'do-what-it-says':
-    doWhat();
-    break;
-
-    default: console.log('Please enter a command');
+        case 'spotify-this-song':
+        spotifyThis(input);
+        break;
+    
+        case 'concert-this':
+        isPlaying(input);
+        break;
+    
+        case 'movie-this':
+        movieThis(input);
+        break;
+    
+        case 'do-what-it-says':
+        doWhat();
+        break;
+    
+        default: console.log('Please enter a command');
+    }
 }
 
 function spotifyThis(song) {
@@ -131,26 +134,8 @@ function doWhat() {
         output += '------------------------------------------------';
         console.log(output);
         log(output);
-        switch(rCommand) {
+        switchCase(rCommand, rInput);
 
-            case 'spotify-this-song':
-            spotifyThis(rInput);
-            break;
-        
-            case 'concert-this':
-            isPlaying(rInput);
-            break;
-        
-            case 'movie-this':
-            movieThis(rInput);
-            break;
-        
-            case 'do-what-it-says':
-            doWhat();
-            break;
-        
-            default: console.log('Please enter a command');
-        }
     })
 }
 
@@ -160,3 +145,5 @@ function log(data) {
         console.log('[Output added to log.txt]');
     })
 }
+
+switchCase(userCommand, userInput);
