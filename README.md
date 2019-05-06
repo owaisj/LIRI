@@ -19,6 +19,9 @@ Clone the repository to your computer and then navigate to the directory in the 
 ## Do What It Says
 - Select a line from random.txt and execute
 - SCREENSHOT OF USE
+## Usage Log
+- After each use of LIRI, the output is recorded to log.txt
+- SCREENSHOT OF `log.txt` after each use of LIRI
 ## Problems and Solutions
 - Formatting random.txt (Do what)
 - Working with objects and treating like arrays (Concert this)
