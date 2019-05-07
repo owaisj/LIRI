@@ -3,9 +3,9 @@ Language Interpretation and Recognition Interface made with Node.js
 ## Installation
 Clone the repository to your computer and then navigate to the directory in the terminal. I used Git bash on Windows during testing.
 ## Spotify This Song
-- *Default*: The Sign by Ace of Base `spotify-this-song`
-- SCREENSHOT OF DEFAULT
-- SCREENSHOT OF `spotify-this-song sunflower`
+- `spotify-this-song`
+![Default Spotify-This-Song](/screenshots/spotify1.PNG)   
+- `spotify-this-song sunflower`
 ## Concert This Artist
 - *Default*: PUP (Currently on tour)
 - Not on tour: Radiohead
