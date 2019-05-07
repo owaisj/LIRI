@@ -129,7 +129,7 @@ function doWhat() {
         var separate = commandArray[index].indexOf('"');
         var rCommand = commandArray[index].slice(0, separate-1);
         var rInput = commandArray[index].slice(separate, commandArray[index].length);
-
+        rInput = rInput.slice(1,-1);
         var output = `Liri will perform ${rCommand} on ${rInput}\n`;
         output += '------------------------------------------------';
         console.log(output);
