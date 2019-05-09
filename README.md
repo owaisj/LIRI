@@ -3,18 +3,22 @@ Language Interpretation and Recognition Interface made with Node.js
 ## Installation
 Clone the repository to your computer and then navigate to the directory in the terminal. I used Git bash on Windows during testing.
 ## Spotify This Song
-`spotify-this-song` 
- 
+The default song is The Sign by Ace of Base  
+`spotify-this-song`  
 ![Default Spotify-This-Song](/screenshots/spotify1.PNG)   
-`spotify-this-song sunflower` 
-   
+This is a demonstration of Sunflower by Post-Malone  
+`spotify-this-song sunflower`  
 ![sunflower](screenshots/spotify2.PNG)
 ## Concert This Artist
-- *Default*: PUP (Currently on tour)
-- Not on tour: Radiohead
-- On tour: The Menzingers
-- Few Shows: Tycho
-- SCREENSHOT OF ALL OF THESE
+The default artist is PUP.  
+`concert-this`  
+![PUP concerts](screenshots/concert1.PNG)  
+Radiohead has no shows.  
+`concert-this Radiohead`  
+![Radiohead shows](screenshots/concert2.PNG)  
+Tycho seems to be on a short tour.  
+`concert-this Tycho`  
+![Tycho shows](screenshots/concert3.PNG)
 ## Movie This Film
 - *Default*: Catch Me If You Can
 - SCREENSHOT DEFAULT
