@@ -11,10 +11,16 @@
     "url": "git+https://github.com/owaisj/LIRI.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Owais J.",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/owaisj/LIRI/issues"
   },
-  "homepage": "https://github.com/owaisj/LIRI#readme"
+  "homepage": "https://github.com/owaisj/LIRI#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^8.0.0",
+    "moment": "^2.24.0",
+    "node-spotify-api": "^1.1.1"
+  }
 }
