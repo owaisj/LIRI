@@ -33,7 +33,7 @@ function switchCase(command, input) {
 }
 
 function spotifyThis(song) {
-    if (song === undefined) song = 'The Sign Ace of Base';
+    if (song === undefined || song === '') song = 'The Sign Ace of Base';
     spotify.search({
         type: 'track',
         query: song,
@@ -53,7 +53,7 @@ function spotifyThis(song) {
 }
 
 function movieThis(film) {
-    if (film === undefined) film = 'Catch Me If You Can';
+    if (film === undefined || film === '') film = 'Catch Me If You Can';
     var queryUrl = `http://www.omdbapi.com/?t=${film}&y=&plot=short&apikey=trilogy`;
     axios.get(queryUrl).then(function(response) {
         var movieInfo = response.data;
@@ -71,7 +71,7 @@ function movieThis(film) {
 }
 
 function isPlaying(band) {
-    if(band === undefined) band = 'PUP';
+    if(band === undefined || band === '') band = 'PUP';
     var queryUrl = `https://rest.bandsintown.com/artists/${band}/events?app_id=codingbootcamp`;
     axios.get(queryUrl).then(function(response){
         var output = 'Concert This Artist\n';
@@ -128,8 +128,7 @@ function doWhat() {
         var index = Math.floor(Math.random()*commandArray.length);
         var separate = commandArray[index].indexOf('"');
         var rCommand = commandArray[index].slice(0, separate-1);
-        var rInput = commandArray[index].slice(separate, commandArray[index].length);
-        rInput = rInput.slice(1,-1);
+        var rInput = commandArray[index].slice(separate, commandArray[index].length).slice(1,-1);
         var output = `Liri will perform ${rCommand} on ${rInput}\n`;
         output += '------------------------------------------------';
         console.log(output);
