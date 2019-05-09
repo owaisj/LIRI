@@ -20,7 +20,7 @@ Clone the repository to your computer and then navigate to the directory in the 
 - SCREENSHOT DEFAULT
 - SCREENSHOT Mr. Nobody
 ## Do What It Says
-- Select a line from random.txt and execute
+- Each line of random.txt is a different command and argument. When LIRI is asked to `do-what-it-says`, the contents of random.txt are split at the line break and then passed through the switch case function. 
 - SCREENSHOT OF USE
 ## Usage Log
 - After each use of LIRI, the output is recorded to log.txt
