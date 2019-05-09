@@ -9,7 +9,7 @@ var fs = require('fs');
 var userCommand = process.argv[2];
 var userInput = process.argv[3];
 
-function switchCase(command, input) {
+(function switchCase(command, input) {
     switch(command) {
 
         case 'spotify-this-song':
@@ -30,7 +30,7 @@ function switchCase(command, input) {
     
         default: console.log('Please enter a command');
     }
-}
+})(userCommand, userInput);
 
 function spotifyThis(song) {
     if (song === undefined || song === '') song = 'The Sign Ace of Base';
@@ -144,5 +144,3 @@ function log(data) {
         console.log('[Output added to log.txt]');
     })
 }
-
-switchCase(userCommand, userInput);
