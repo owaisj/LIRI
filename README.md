@@ -15,14 +15,14 @@ Clone the repository to your computer and then navigate to the directory in the 
 ## Inquirer Implementation
 Inquirer JS allows the app to remove a reliance on the `process.argv` array. The user is asked to choose a feature and then enter a query.
 - *Screenshot with Inquirer
-## Spotify This Song
+## Spotify This Song (Demo)
 The default song is The Sign by Ace of Base  
 `spotify-this-song`  
 ![Default Spotify-This-Song](/screenshots/spotify1.PNG)   
 This is a demonstration of Sunflower by Post-Malone  
 `spotify-this-song sunflower`  
 ![sunflower](screenshots/spotify2.PNG)
-## Concert This Artist
+## Concert This Artist (Demo)
 The default artist is PUP.  
 `concert-this`  
 ![PUP concerts](screenshots/concert1.PNG)  
@@ -32,17 +32,17 @@ Radiohead has no shows.
 Tycho seems to be on a short tour.  
 `concert-this Tycho`  
 ![Tycho shows](screenshots/concert3.PNG)
-## Movie This Film
+## Movie This Film (Demo)
 Catch Me If You Can (My favorite film) is the default input.  
 `movie-this`  
 ![CMIYC Info](screenshots/movie1.PNG)
 `movie-this 'Mr. Nobody'`  
 ![Mr. Nobody Info](screenshots/movie2.PNG)
-## Do What It Says
+## Do What It Says (Demo)
 Each line of random.txt is a different command and argument. When LIRI is asked to `do-what-it-says`, the contents of random.txt are split at the line break and then passed through the switch case function.  
 Here is the output after the command has run three times.  
 ![Do What output](screenshots/dowhat1.PNG)
-## Usage Log
+## Usage Log (Demo)
 After each use of LIRI, the output is recorded to log.txt  
 Here is log.txt after the above three `do-what-it-says` commands.  
 ![log.txt demo](screenshots/log.PNG)
