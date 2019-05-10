@@ -26,7 +26,7 @@ function switchCase(command, input) {
         doWhat();
         break;
     
-        default: console.log('Please enter a command');
+        default: console.log('Thanks for using LIRI');
     }
 };
 
@@ -147,7 +147,8 @@ var commands = {
     'spotify-this-song': 'Which song?', 
     'concert-this': 'Which artist?', 
     'movie-this': 'Which film?', 
-    'do-what-it-says': null 
+    'do-what-it-says': null,
+    'nothing': null
 };
 (function inquiry() {
     inquirer.prompt([
@@ -160,10 +161,9 @@ var commands = {
     ]).then(function(response){
         let userCommand = response.action;
         let message = commands[response.action];
-        if (userCommand === 'do-what-it-says') {
+        if (userCommand === 'do-what-it-says' || userCommand === 'nothing') {
             return switchCase(userCommand, null);
         }
-        
         return inquirer.prompt([{
             name: 'input',
             type: 'text',

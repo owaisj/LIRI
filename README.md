@@ -40,6 +40,6 @@ Here is log.txt after the above three `do-what-it-says` commands.
     - Using the `Object.keys()` method on `showSnippet` allowed me to use the `forEach` method on the array of properties and produce an output with important information.  
 - This was the first CLI app I have ever written and had never used Regex and characters like newline (`\n`)
 ## Inquirer Implementation
-
+Inquirer JS allows the app to remove a reliance on the `process.argv` array. 
 ## Author
 - Owais Jamil
