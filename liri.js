@@ -7,9 +7,6 @@ var moment = require('moment');
 var fs = require('fs');
 var inquirer = require('inquirer');
 
-var userCommand = process.argv[2];
-var userInput = process.argv[3];
-
 function switchCase(command, input) {
     switch(command) {
 
@@ -146,19 +143,39 @@ function log(data) {
     })
 }
 
+var commands = {
+    'spotify-this-song': 'Which song?', 
+    'concert-this': 'Which artist?', 
+    'movie-this': 'Which film?', 
+    'do-what-it-says': 'Ready?' 
+};
 inquirer.prompt([
     {
         type: 'list',
         name: 'action',
         message: 'What do you want to do?',
-        choices: ['spotify-this-song', 'concert-this', 'movie-this', 'do-what-it-says']
-    },
-    {
-        name: 'input',
-        message: 'What is your query?'
+        choices: Object.keys(commands)
     }
 ]).then(function(response){
-    console.log(response.action);
-    console.log(response.input);
-    switchCase(response.action, response.input);
+    let userCommand = response.action;
+    let message = commands[response.action];
+    if (userCommand === 'do-what-it-says') {
+        return inquirer.prompt([{
+            name: 'ready',
+            type: 'confirm',
+            message: message
+        }]).then(function(response){
+            if (response.ready) return switchCase(userCommand, null);
+            return console.log('See you later');
+        })
+    }
+    
+    return inquirer.prompt([{
+        name: 'input',
+        type: 'text',
+        message: message
+    }]).then(function(response){
+        let userInput = response.input;
+        switchCase(userCommand, userInput);
+    })
 });
