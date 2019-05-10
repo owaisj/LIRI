@@ -5,6 +5,16 @@ Clone the repository to your computer and then navigate to the directory in the 
     
 `npm install`  
 `node liri`
+## Problems and Solutions
+- Formatting random.txt (Do what)
+    - `concert-this "Radiohead"` vs. `concert-this Radiohead`: This was a problem with the bandsintown API as it would not accept quotes in the input. To solve this, the quotes are sliced from the input string like so, `inputString.slice(1, -1)`.
+- The bandsintown API returned a lot of data so I created an object called `showSnippet` that took a maximum of 10 shows from the response.
+    - *Creating `showSnippet`
+    - Using the `Object.keys()` method on `showSnippet` allowed me to use the `forEach` method on the array of properties and produce an output with important information.  
+- This was the first CLI app I have ever written and had never used Regex and characters like newline (`\n`)
+## Inquirer Implementation
+Inquirer JS allows the app to remove a reliance on the `process.argv` array. The user is asked to choose a feature and then enter a query.
+- *Screenshot with Inquirer
 ## Spotify This Song
 The default song is The Sign by Ace of Base  
 `spotify-this-song`  
@@ -36,15 +46,5 @@ Here is the output after the command has run three times.
 After each use of LIRI, the output is recorded to log.txt  
 Here is log.txt after the above three `do-what-it-says` commands.  
 ![log.txt demo](screenshots/log.PNG)
-## Problems and Solutions
-- Formatting random.txt (Do what)
-    - `concert-this "Radiohead"` vs. `concert-this Radiohead`: This was a problem with the bandsintown API as it would not accept quotes in the input. To solve this, the quotes are sliced from the input string like so, `inputString.slice(1, -1)`.
-- The bandsintown API returned a lot of data so I created an object called `showSnippet` that took a maximum of 10 shows from the response.
-    - *Creating `showSnippet`
-    - Using the `Object.keys()` method on `showSnippet` allowed me to use the `forEach` method on the array of properties and produce an output with important information.  
-- This was the first CLI app I have ever written and had never used Regex and characters like newline (`\n`)
-## Inquirer Implementation
-Inquirer JS allows the app to remove a reliance on the `process.argv` array. The user is asked to choose a feature and then enter a query.
-- *Screenshot with Inquirer
 ## Author
 - Owais Jamil
