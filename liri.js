@@ -5,11 +5,12 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var moment = require('moment');
 var fs = require('fs');
+var inquirer = require('inquirer');
 
 var userCommand = process.argv[2];
 var userInput = process.argv[3];
 
-(function switchCase(command, input) {
+function switchCase(command, input) {
     switch(command) {
 
         case 'spotify-this-song':
@@ -30,7 +31,7 @@ var userInput = process.argv[3];
     
         default: console.log('Please enter a command');
     }
-})(userCommand, userInput);
+};
 
 function spotifyThis(song) {
     if (song === undefined || song === '') song = 'The Sign Ace of Base';
@@ -144,3 +145,20 @@ function log(data) {
         console.log('[Output added to log.txt]');
     })
 }
+
+inquirer.prompt([
+    {
+        type: 'list',
+        name: 'action',
+        message: 'What do you want to do?',
+        choices: ['spotify-this-song', 'concert-this', 'movie-this', 'do-what-it-says']
+    },
+    {
+        name: 'input',
+        message: 'What is your query?'
+    }
+]).then(function(response){
+    console.log(response.action);
+    console.log(response.input);
+    switchCase(response.action, response.input);
+});
