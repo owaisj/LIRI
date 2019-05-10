@@ -149,33 +149,35 @@ var commands = {
     'movie-this': 'Which film?', 
     'do-what-it-says': 'Ready?' 
 };
-inquirer.prompt([
-    {
-        type: 'list',
-        name: 'action',
-        message: 'What do you want to do?',
-        choices: Object.keys(commands)
-    }
-]).then(function(response){
-    let userCommand = response.action;
-    let message = commands[response.action];
-    if (userCommand === 'do-what-it-says') {
+(function inquiry() {
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'action',
+            message: 'What do you want to do?',
+            choices: Object.keys(commands)
+        }
+    ]).then(function(response){
+        let userCommand = response.action;
+        let message = commands[response.action];
+        if (userCommand === 'do-what-it-says') {
+            return inquirer.prompt([{
+                name: 'ready',
+                type: 'confirm',
+                message: message
+            }]).then(function(response){
+                if (response.ready) return switchCase(userCommand, null);
+                return console.log('See you later');
+            })
+        }
+        
         return inquirer.prompt([{
-            name: 'ready',
-            type: 'confirm',
+            name: 'input',
+            type: 'text',
             message: message
         }]).then(function(response){
-            if (response.ready) return switchCase(userCommand, null);
-            return console.log('See you later');
+            let userInput = response.input;
+            switchCase(userCommand, userInput);
         })
-    }
-    
-    return inquirer.prompt([{
-        name: 'input',
-        type: 'text',
-        message: message
-    }]).then(function(response){
-        let userInput = response.input;
-        switchCase(userCommand, userInput);
-    })
-});
+    });
+})();
