@@ -147,7 +147,7 @@ var commands = {
     'spotify-this-song': 'Which song?', 
     'concert-this': 'Which artist?', 
     'movie-this': 'Which film?', 
-    'do-what-it-says': 'Ready?' 
+    'do-what-it-says': null 
 };
 (function inquiry() {
     inquirer.prompt([
@@ -161,14 +161,7 @@ var commands = {
         let userCommand = response.action;
         let message = commands[response.action];
         if (userCommand === 'do-what-it-says') {
-            return inquirer.prompt([{
-                name: 'ready',
-                type: 'confirm',
-                message: message
-            }]).then(function(response){
-                if (response.ready) return switchCase(userCommand, null);
-                return console.log('See you later');
-            })
+            return switchCase(userCommand, null);
         }
         
         return inquirer.prompt([{
