@@ -39,5 +39,7 @@ Here is log.txt after the above three `do-what-it-says` commands.
 - The bandsintown API returned a lot of data so I created an object called `showSnippet` that took a maximum of 10 shows from the response.
     - Using the `Object.keys()` method on `showSnippet` allowed me to use the `forEach` method on the array of properties and produce an output with important information.  
 - This was the first CLI app I have ever written and had never used Regex and characters like newline (`\n`)
+## Inquirer Implementation
+Inquirer JS allows the app to remove a reliance on the `process.argv` array. The user is asked to choose a feature and then enter a query. 
 ## Author
 - Owais Jamil

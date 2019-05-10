@@ -5,11 +5,9 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var moment = require('moment');
 var fs = require('fs');
+var inquirer = require('inquirer');
 
-var userCommand = process.argv[2];
-var userInput = process.argv[3];
-
-(function switchCase(command, input) {
+function switchCase(command, input) {
     switch(command) {
 
         case 'spotify-this-song':
@@ -28,9 +26,9 @@ var userInput = process.argv[3];
         doWhat();
         break;
     
-        default: console.log('Please enter a command');
+        default: console.log('Thanks for using LIRI');
     }
-})(userCommand, userInput);
+};
 
 function spotifyThis(song) {
     if (song === undefined || song === '') song = 'The Sign Ace of Base';
@@ -144,3 +142,35 @@ function log(data) {
         console.log('[Output added to log.txt]');
     })
 }
+
+var commands = {
+    'spotify-this-song': 'Which song?', 
+    'concert-this': 'Which artist?', 
+    'movie-this': 'Which film?', 
+    'do-what-it-says': null,
+    'nothing': null
+};
+(function inquiry() {
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'action',
+            message: 'What do you want to do?',
+            choices: Object.keys(commands)
+        }
+    ]).then(function(response){
+        let userCommand = response.action;
+        let message = commands[response.action];
+        if (userCommand === 'do-what-it-says' || userCommand === 'nothing') {
+            return switchCase(userCommand, null);
+        }
+        return inquirer.prompt([{
+            name: 'input',
+            type: 'text',
+            message: message
+        }]).then(function(response){
+            let userInput = response.input;
+            switchCase(userCommand, userInput);
+        })
+    });
+})();
